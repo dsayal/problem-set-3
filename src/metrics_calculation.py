@@ -49,7 +49,7 @@ def calculate_metrics(model_pred_df, genre_list, genre_true_counts, genre_tp_cou
     macro_prec_list = []
     macro_recall_list = []
     macro_f1_list = []
-    
+
     for genre in genre_list:
         tp = genre_tp_counts.get(genre, 0)
         fp = genre_fp_counts.get(genre, 0)
@@ -85,4 +85,15 @@ def calculate_sklearn_metrics(model_pred_df, genre_list):
     true_matrix = pd.DataFrame(true_rows)
     '''
 
-    # Your code here
+    true_labels = model_pred_df['true_genre']
+    predicted_labels = model_pred_df['predicted_genre']
+
+    macro_prec = precision_score(true_labels, predicted_labels, average='macro', labels=genre_list)
+    macro_rec = recall_score(true_labels, predicted_labels, average='macro', labels=genre_list)
+    macro_f1 = f1_score(true_labels, predicted_labels, average='macro', labels=genre_list)
+
+    micro_prec = precision_score(true_labels, predicted_labels, average='micro', labels=genre_list)
+    micro_rec = recall_score(true_labels, predicted_labels, average='micro', labels=genre_list)
+    micro_f1 = f1_score(true_labels, predicted_labels, average='micro', labels=genre_list)
+
+    return macro_prec, macro_rec, macro_f1, micro_prec, micro_rec, micro_f1
