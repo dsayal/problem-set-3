@@ -85,8 +85,9 @@ def calculate_sklearn_metrics(model_pred_df, genre_list):
     true_matrix = pd.DataFrame(true_rows)
     '''
 
-    true_labels = model_pred_df['true_genre']
-    predicted_labels = model_pred_df['predicted_genre']
+
+    true_labels = model_pred_df['actual genres']
+    predicted_labels = model_pred_df['predicted']
 
     macro_prec = precision_score(true_labels, predicted_labels, average='macro', labels=genre_list)
     macro_rec = recall_score(true_labels, predicted_labels, average='macro', labels=genre_list)
