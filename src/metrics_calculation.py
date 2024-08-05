@@ -1,11 +1,3 @@
-'''
-PART 2: METRICS CALCULATION
-- Tailor the code scaffolding below to calculate various metrics
-- Write the functions below
-    - Further info and hints are provided in the docstrings
-    - These should return values when called by the main.py
-'''
-
 import numpy as np
 from sklearn.metrics import precision_score, recall_score, f1_score
 import pandas as pd
@@ -64,7 +56,7 @@ def calculate_metrics(model_pred_df, genre_list, genre_true_counts, genre_tp_cou
         macro_f1_list.append(f1)
 
     return micro_precision, micro_recall, micro_f1, macro_prec_list, macro_recall_list, macro_f1_list
-    
+
 def calculate_sklearn_metrics(model_pred_df, genre_list):
     '''
     Calculate metrics using sklearn's precision_recall_fscore_support.
@@ -78,23 +70,28 @@ def calculate_sklearn_metrics(model_pred_df, genre_list):
     
     Hint #1: You'll need these two lists
     pred_rows = []
-    true_rows = []
+    true_rows []
     
     Hint #2: And a little later you'll need these two matrixes for sk-learn
     pred_matrix = pd.DataFrame(pred_rows)
     true_matrix = pd.DataFrame(true_rows)
     '''
 
-
     true_labels = model_pred_df['actual genres']
     predicted_labels = model_pred_df['predicted']
 
-    macro_prec = precision_score(true_labels, predicted_labels, average='macro', labels=genre_list)
-    macro_rec = recall_score(true_labels, predicted_labels, average='macro', labels=genre_list)
-    macro_f1 = f1_score(true_labels, predicted_labels, average='macro', labels=genre_list)
+    # Debugging prints to ensure labels match correctly
+    print("True Labels Unique Values: ", true_labels.unique())
+    print("Predicted Labels Unique Values: ", predicted_labels.unique())
+    print("Genre List: ", genre_list)
 
-    micro_prec = precision_score(true_labels, predicted_labels, average='micro', labels=genre_list)
-    micro_rec = recall_score(true_labels, predicted_labels, average='micro', labels=genre_list)
-    micro_f1 = f1_score(true_labels, predicted_labels, average='micro', labels=genre_list)
+    macro_prec = precision_score(true_labels, predicted_labels, average='macro', labels=genre_list, zero_division=0)
+    macro_rec = recall_score(true_labels, predicted_labels, average='macro', labels=genre_list, zero_division=0)
+    macro_f1 = f1_score(true_labels, predicted_labels, average='macro', labels=genre_list, zero_division=0)
+
+    micro_prec = precision_score(true_labels, predicted_labels, average='micro', labels=genre_list, zero_division=0)
+    micro_rec = recall_score(true_labels, predicted_labels, average='micro', labels=genre_list, zero_division=0)
+    micro_f1 = f1_score(true_labels, predicted_labels, average='micro', labels=genre_list, zero_division=0)
 
     return macro_prec, macro_rec, macro_f1, micro_prec, micro_rec, micro_f1
+
