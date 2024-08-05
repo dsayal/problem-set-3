@@ -7,7 +7,7 @@ PART 2: METRICS CALCULATION
 '''
 
 import numpy as np
-from sklearn.metrics import precision_recall_fscore_support
+from sklearn.metrics import precision_score, recall_score, f1_score
 import pandas as pd
 
 def calculate_metrics(model_pred_df, genre_list, genre_true_counts, genre_tp_counts, genre_fp_counts):
