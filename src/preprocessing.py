@@ -16,7 +16,7 @@ def load_data():
         model_pred_df (pd.DataFrame): DataFrame containing model predictions
         genres_df (pd.DataFrame): DataFrame containing genre information
     '''
-    model_pred_df = pd.read_csv('/Users/diyasayal/Desktop/INST414/problem-set-3/data/model_predictions.csv')
+    model_pred_df = pd.read_csv('/Users/diyasayal/Desktop/INST414/problem-set-3/data/prediction_model_03.csv')
     genres_df = pd.read_csv('/Users/diyasayal/Desktop/INST414/problem-set-3/data/genres.csv')
     return model_pred_df, genres_df
 
