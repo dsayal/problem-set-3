@@ -32,4 +32,15 @@ def process_data(model_pred_df, genres_df):
         genre_fp_counts (dict): Dictionary of false positive genre counts
     '''
 
-    # Your code here
+    genre_list = genres_df['genre'].unique().tolist()
+
+    genre_true_counts = {}
+    genre_tp_counts = {}
+    genre_fp_counts = {}
+
+    for genre in genre_list:
+        genre_true_counts[genre] = genres_df[genres_df['genre'] == genre].shape[0]
+        genre_tp_counts[genre] = model_pred_df[(model_pred_df['true_genre'] == genre) & (model_pred_df['predicted_genre'] == genre)].shape[0]
+        genre_fp_counts[genre] = model_pred_df[(model_pred_df['true_genre'] != genre) & (model_pred_df['predicted_genre'] == genre)].shape[0]
+
+    return genre_list, genre_true_counts, genre_tp_counts, genre_fp_counts
